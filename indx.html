@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omar Al Sayyad | Software Engineer</title>
+  <meta name="description" content="Omar Al Sayyad — Software Engineer (Laravel, MySQL, REST APIs). Portfolio & resume." />
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            ink: '#0B1020',
+            paper: '#FBFBFD',
+            mist: '#F3F4F8',
+            accent: '#7C3AED',   // violet
+            accent2: '#06B6D4',  // cyan
+            accent3: '#F59E0B',  // amber
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(11,16,32,.12)',
+            lift: '0 20px 60px rgba(11,16,32,.18)',
+          },
+          borderRadius: { xl2: '1.25rem' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :focus-visible { outline: 3px solid rgba(124,58,237,.55); outline-offset: 3px; border-radius: 12px; }
+
+    /* Premium background: soft aurora + grain */
+    .bg-aurora{
+      background:
+        radial-gradient(1200px 500px at 10% 10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 420px at 90% 0%, rgba(6,182,212,.20), transparent 55%),
+        radial-gradient(900px 520px at 70% 95%, rgba(245,158,11,.14), transparent 55%),
+        linear-gradient(180deg, #FBFBFD 0%, #F3F4F8 40%, #FBFBFD 100%);
+    }
+    .grain{
+      position: fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* Gradient border card */
+    .gcard{
+      position: relative;
+      border-radius: 1.25rem;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 18px 50px rgba(11,16,32,.10);
+    }
+    .gcard:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 1.35rem;
+      background: linear-gradient(120deg, rgba(124,58,237,.55), rgba(6,182,212,.35), rgba(245,158,11,.25));
+      filter: blur(18px);
+      opacity: .55;
+      z-index:0;
+      pointer-events:none;
+    }
+    .gcard > *{ position: relative; z-index:1; }
+
+    /* Timeline line */
+    .tline{ position: relative; }
+    .tline:before{
+      content:""; position:absolute; left: 10px; top: 0; bottom: 0;
+      width: 2px; border-radius: 999px;
+      background: linear-gradient(180deg, rgba(124,58,237,.75), rgba(6,182,212,.65));
+      opacity: .45;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-ink bg-aurora">
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Top progress bar -->
+  <div id="progress" class="fixed top-0 left-0 h-[3px] w-0 z-[100]"
+       style="background: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(245,158,11,1));"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="gcard px-4 sm:px-6 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3 font-extrabold tracking-tight">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-white"
+                style="background: linear-gradient(135deg, rgba(124,58,237,1), rgba(6,182,212,1));">
+            OA
+          </span>
+          <span class="hidden sm:block">Omar Al Sayyad</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
+          <a class="hover:text-ink" href="#skills">Skills</a>
+          <a class="hover:text-ink" href="#experience">Experience</a>
+          <a class="hover:text-ink" href="#projects">Projects</a>
+          <a class="hover:text-ink" href="#education">Education</a>
+          <a class="hover:text-ink" href="#contact">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <a href="mailto:omaralsayyad20032003@gmail.com"
+             class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 rounded-xl bg-ink text-white text-sm font-bold hover:opacity-90 transition">
+            Email
+          </a>
+          <button id="menuBtn"
+                  class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70 hover:bg-white transition"
+                  aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="md:hidden hidden mt-2">
+        <div class="gcard px-4 py-3 grid gap-2 text-sm font-semibold text-slate-700">
+          <a class="py-1 hover:text-ink" href="#skills">Skills</a>
+          <a class="py-1 hover:text-ink" href="#experience">Experience</a>
+          <a class="py-1 hover:text-ink" href="#projects">Projects</a>
+          <a class="py-1 hover:text-ink" href="#education">Education</a>
+          <a class="py-1 hover:text-ink" href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-20">
+
+    <!-- HERO -->
+    <section id="home" class="pt-10 sm:pt-14">
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-7 reveal">
+          <div class="inline-flex items-center gap-2 text-xs font-extrabold px-3 py-1 rounded-full border border-slate-200 bg-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+            Software Engineer • Laravel • REST APIs • MySQL
+          </div>
+
+          <h1 class="mt-5 text-4xl sm:text-6xl font-black tracking-tight leading-[1.02]">
+            Backend systems that are<br class="hidden sm:block" />
+            <span class="text-transparent bg-clip-text"
+                  style="background-image: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(245,158,11,1));">
+              fast, clean, and reliable.
+            </span>
+          </h1>
+
+          <p class="mt-5 text-slate-700 leading-relaxed max-w-2xl">
+            I build production-ready backends with Laravel, focusing on authentication, multi-role platforms,
+            payments, and communication workflows (Twilio). I like shipping features with clean architecture
+            and predictable APIs.
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <!-- CV links -->
+            <a href="mailto:omaralsayyad20032003@gmail.com"
+               class="inline-flex items-center gap-2 justify-center px-4 py-2.5 rounded-xl bg-ink text-white font-extrabold text-sm hover:opacity-90 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4V4z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6"/>
+              </svg>
+              Email
+            </a>
+
+            <a href="tel:+963969234458"
+               class="inline-flex items-center gap-2 justify-center px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 font-extrabold text-sm hover:bg-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.86 19.86 0 01-8.63-3.07A19.5 19.5 0 013.15 12.8 19.86 19.86 0 01.08 4.18 2 2 0 012.06 2h3a2 2 0 012 1.72c.12.86.3 1.7.54 2.5a2 2 0 01-.45 2.11L6.1 9.91a16 16 0 006 6l1.58-1.58a2 2 0 012.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0122 16.92z"/>
+              </svg>
+              Call
+            </a>
+
+            <a href="https://yorkacademy.uk" target="_blank" rel="noreferrer"
+               class="inline-flex items-center gap-2 justify-center px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 font-extrabold text-sm hover:bg-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+              </svg>
+              Live (yorkacademy.uk)
+            </a>
+          </div>
+
+          <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-700 font-semibold">
+            <span>📍 Damascus, Syria</span>
+            <span>✅ Available: Backend roles</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 reveal">
+          <div class="gcard p-6 sm:p-7">
+            <p class="text-xs font-black tracking-widest uppercase text-slate-600">Snapshot</p>
+
+            <div class="mt-4 grid gap-3 text-sm text-slate-700">
+              <div class="flex items-start gap-3">
+                <span class="mt-1 h-2 w-2 rounded-full bg-accent2"></span>
+                <p><span class="font-extrabold text-ink">Laravel 10</span> multi-role platforms (Admin / Owner / Assistant / Patient).</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="mt-1 h-2 w-2 rounded-full bg-accent"></span>
+                <p><span class="font-extrabold text-ink">Twilio + Stripe</span> payments/refunds and communication workflows.</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="mt-1 h-2 w-2 rounded-full bg-accent3"></span>
+                <p><span class="font-extrabold text-ink">Filament</span> dashboards, exports, and admin tools.</p>
+              </div>
+            </div>
+
+            <div class="mt-6 grid sm:grid-cols-3 gap-3">
+              <div class="rounded-xl border border-slate-200 bg-white/70 p-3">
+                <p class="text-xs font-black tracking-widest uppercase text-slate-600">Core</p>
+                <p class="mt-1 font-extrabold">Laravel</p>
+              </div>
+              <div class="rounded-xl border border-slate-200 bg-white/70 p-3">
+                <p class="text-xs font-black tracking-widest uppercase text-slate-600">Data</p>
+                <p class="mt-1 font-extrabold">MySQL</p>
+              </div>
+              <div class="rounded-xl border border-slate-200 bg-white/70 p-3">
+                <p class="text-xs font-black tracking-widest uppercase text-slate-600">APIs</p>
+                <p class="mt-1 font-extrabold">REST</p>
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-ink text-white">PHP</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white/70">Swagger</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white/70">Postman</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white/70">Git</span>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white/70">Plesk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="mt-10 sm:mt-12 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Skills</h2>
+            <p class="mt-2 text-slate-700">Backend stack, tools, and languages.</p>
+          </div>
+          <div class="text-xs font-black tracking-widest uppercase text-slate-600">From resume</div>
+        </div>
+
+        <div class="mt-6 grid md:grid-cols-3 gap-4 text-sm">
+          <div class="rounded-xl2 border border-slate-200 bg-white/70 p-5">
+            <p class="text-xs font-black tracking-widest uppercase text-slate-600">Backend</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Laravel</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">PHP</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">REST APIs</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">OOP</span>
+            </div>
+          </div>
+
+          <div class="rounded-xl2 border border-slate-200 bg-white/70 p-5">
+            <p class="text-xs font-black tracking-widest uppercase text-slate-600">Data & Docs</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">MySQL</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Swagger</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Composer</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Postman</span>
+            </div>
+          </div>
+
+          <div class="rounded-xl2 border border-slate-200 bg-white/70 p-5">
+            <p class="text-xs font-black tracking-widest uppercase text-slate-600">Tools</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Git</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">PHPStorm</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Plesk</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Twilio</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Stripe</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 text-sm text-slate-700">
+          <span class="font-extrabold">Also:</span> Java, C++, JavaScript
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="mt-10 sm:mt-12 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Experience</h2>
+            <p class="mt-2 text-slate-700">Recent roles and responsibilities.</p>
+          </div>
+          <div class="text-xs font-black tracking-widest uppercase text-slate-600">2024 — 2025</div>
+        </div>
+
+        <div class="mt-6 grid gap-5">
+          <div class="rounded-xl2 border border-slate-200 bg-white/70 p-5">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <p class="text-lg font-black">Backend Software Engineer</p>
+                <p class="mt-1 text-slate-700 font-semibold">Toolii Company • Australia</p>
+              </div>
+              <div class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Jun 2025 — Nov 2025</div>
+            </div>
+
+            <div class="mt-4 tline pl-8 grid gap-3 text-slate-700">
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent"></span>
+                Built a multi-role clinic management & virtual assistant platform (Laravel 10).
+              </div>
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent2"></span>
+                Integrated Twilio voice/SMS and Stripe payments/refunds for bookings.
+              </div>
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent3"></span>
+                Delivered secure medical file upload/preview + manual review tool for edge cases.
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl2 border border-slate-200 bg-white/70 p-5">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <p class="text-lg font-black">Junior Laravel Developer</p>
+                <p class="mt-1 text-slate-700 font-semibold">York British Company • London</p>
+              </div>
+              <div class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Dec 2024 — May 2025</div>
+            </div>
+
+            <div class="mt-4 tline pl-8 grid gap-3 text-slate-700">
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent2"></span>
+                Designed a distributed microservice system for authentic company review aggregation.
+              </div>
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent"></span>
+                Built a Filament admin dashboard with export tools; deployed live at
+                <a class="font-extrabold underline" href="https://yorkacademy.uk" target="_blank" rel="noreferrer">yorkacademy.uk</a>.
+              </div>
+              <div class="relative">
+                <span class="absolute left-[-30px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent3"></span>
+                Developed an Exam Management System: timed sessions, multi-answer grading, and reporting.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="mt-10 sm:mt-12 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Projects</h2>
+            <p class="mt-2 text-slate-700">Selected work — expand to read details.</p>
+          </div>
+          <a class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-white/70 text-sm font-extrabold hover:bg-white transition"
+             href="https://yorkacademy.uk" target="_blank" rel="noreferrer">
+            Live example
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="mt-6 grid lg:grid-cols-2 gap-4">
+          <!-- Project card -->
+          <details class="group rounded-xl2 border border-slate-200 bg-white/70 p-5 open:bg-white open:shadow-soft transition">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-black">Clinic Management & Virtual Assistant</p>
+                <p class="mt-1 text-slate-700 font-semibold">Laravel 10 • Twilio • Stripe</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Expand</span>
+            </summary>
+            <div class="mt-4 text-slate-700 leading-relaxed">
+              Multi-role clinic platform (Admin, Clinic Owner, Virtual Assistant, Patient) with booking, dashboards,
+              advanced search, and real-time communication tools.
+              <ul class="mt-3 list-disc pl-5 space-y-2">
+                <li>Twilio voice/SMS integration for assistant workflows.</li>
+                <li>Stripe payment + refund automation.</li>
+                <li>RBAC and multi-clinic management.</li>
+              </ul>
+            </div>
+          
+            <div class="mt-4 pt-4 border-t border-slate-200">
+              <a class="inline-flex items-center gap-2 font-extrabold underline decoration-slate-300 hover:decoration-ink"
+                 href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+                Source (GitHub)
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+                </svg>
+              </a>
+            </div>
+          </details>
+
+          <details class="group rounded-xl2 border border-slate-200 bg-white/70 p-5 open:bg-white open:shadow-soft transition">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-black">Medical File Upload & Manual Review Tool</p>
+                <p class="mt-1 text-slate-700 font-semibold">PDF/DOC/Images • Secure workflows</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Expand</span>
+            </summary>
+            <div class="mt-4 text-slate-700 leading-relaxed">
+              Secure upload and preview for medical files, plus page-by-page navigation and manual intervention for
+              cases where automated processing fails.
+              <ul class="mt-3 list-disc pl-5 space-y-2">
+                <li>Employee permissions and multi-clinic scopes.</li>
+                <li>Issue reporting and transaction handling.</li>
+                <li>Designed for reliability and traceability.</li>
+              </ul>
+            </div>
+          
+            <div class="mt-4 pt-4 border-t border-slate-200">
+              <a class="inline-flex items-center gap-2 font-extrabold underline decoration-slate-300 hover:decoration-ink"
+                 href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+                Source (GitHub)
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+                </svg>
+              </a>
+            </div>
+          </details>
+
+          <details class="group rounded-xl2 border border-slate-200 bg-white/70 p-5 open:bg-white open:shadow-soft transition">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-black">Company Review Aggregation (Live)</p>
+                <p class="mt-1 text-slate-700 font-semibold">Microservices • Filament Admin</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Expand</span>
+            </summary>
+            <div class="mt-4 text-slate-700 leading-relaxed">
+              Distributed system for aggregating authentic company reviews, with admin dashboard and export features.
+              <div class="mt-3">
+                <a class="font-extrabold underline" href="https://yorkacademy.uk" target="_blank" rel="noreferrer">yorkacademy.uk</a>
+              </div>
+            </div>
+          
+            <div class="mt-4 pt-4 border-t border-slate-200">
+              <a class="inline-flex items-center gap-2 font-extrabold underline decoration-slate-300 hover:decoration-ink"
+                 href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+                Source (GitHub)
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+                </svg>
+              </a>
+            </div>
+          </details>
+
+          <details class="group rounded-xl2 border border-slate-200 bg-white/70 p-5 open:bg-white open:shadow-soft transition">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-black">Exam Management System</p>
+                <p class="mt-1 text-slate-700 font-semibold">Dynamic exams • Auto-grading</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Expand</span>
+            </summary>
+            <div class="mt-4 text-slate-700 leading-relaxed">
+              System for dynamic exam creation, timed sessions, multi-answer evaluation, and performance reporting.
+              <ul class="mt-3 list-disc pl-5 space-y-2">
+                <li>User assignments and reporting dashboards.</li>
+                <li>Timed exams and configurable rules.</li>
+                <li>Designed for clarity and scalability.</li>
+              </ul>
+            </div>
+          
+            <div class="mt-4 pt-4 border-t border-slate-200">
+              <a class="inline-flex items-center gap-2 font-extrabold underline decoration-slate-300 hover:decoration-ink"
+                 href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+                Source (GitHub)
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+                </svg>
+              </a>
+            </div>
+          </details>
+
+
+          <details class="group rounded-xl2 border border-slate-200 bg-white/70 p-5 open:bg-white open:shadow-soft transition">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-black">Advanced Banking System with Design Patterns (SE3)</p>
+                <p class="mt-1 text-slate-700 font-semibold">Architecture • OOP • SOLID • Design Patterns</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border border-slate-200 bg-white">Expand</span>
+            </summary>
+
+            <div class="mt-4 text-slate-700 leading-relaxed">
+              A modular and extensible banking system showcasing clean separation of concerns and scalable design.
+              <ul class="mt-3 list-disc pl-5 space-y-2">
+                <li>Includes: account management, transactions, notifications, RBAC, reporting.</li>
+                <li>Patterns: Composite, Adapter, Decorator, Observer, Strategy, Chain of Responsibility (and more).</li>
+              </ul>
+
+              <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">OOP</span>
+                <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">SOLID</span>
+                <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Design Patterns</span>
+                <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Architecture</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-slate-200">
+              <a class="inline-flex items-center gap-2 font-extrabold underline decoration-slate-300 hover:decoration-ink"
+                 href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+                Source (GitHub)
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+                </svg>
+              </a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION + LANG -->
+    <section id="education" class="mt-10 sm:mt-12 reveal">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="gcard p-6 sm:p-8">
+          <h2 class="text-2xl font-black tracking-tight">Education</h2>
+          <p class="mt-2 text-slate-700 font-semibold">Damascus University — IT Engineering</p>
+          <p class="mt-2 text-slate-700">Sep 2021 — Present</p>
+        </div>
+
+        <div class="gcard p-6 sm:p-8">
+          <h2 class="text-2xl font-black tracking-tight">Languages</h2>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">Arabic (Native)</span>
+            <span class="px-3 py-1 rounded-full border border-slate-200 bg-white font-extrabold">English (Medium)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mt-10 sm:mt-12 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Contact</h2>
+            <p class="mt-2 text-slate-700">Use the links below to reach out.</p>
+          </div>
+          <button id="copyBtn"
+                  class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-white/70 text-sm font-extrabold hover:bg-white transition">
+            Copy Email
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 17H6a2 2 0 01-2-2V6a2 2 0 012-2h9a2 2 0 012 2v2"/>
+              <rect x="8" y="9" width="13" height="13" rx="2" ry="2"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="mt-6 grid sm:grid-cols-3 gap-3 text-sm">
+          <a class="rounded-xl2 border border-slate-200 bg-white/70 p-4 font-extrabold hover:bg-white transition"
+             href="mailto:omaralsayyad20032003@gmail.com">✉ Email</a>
+          <a class="rounded-xl2 border border-slate-200 bg-white/70 p-4 font-extrabold hover:bg-white transition"
+             href="tel:+963969234458">☎ Phone</a>
+          <a class="rounded-xl2 border border-slate-200 bg-white/70 p-4 font-extrabold hover:bg-white transition"
+             href="https://yorkacademy.uk" target="_blank" rel="noreferrer">↗ yorkacademy.uk</a>
+        </div>
+
+        <p id="toast" class="mt-4 text-sm font-semibold text-slate-700 hidden">Copied ✅</p>
+
+        <footer class="mt-8 pt-6 border-t border-slate-200 text-sm text-slate-600 flex items-center justify-between gap-4 flex-wrap">
+          <span>© <span id="year"></span> Omar Al Sayyad</span>
+          <span class="font-semibold">Portfolio v3 • Aurora theme</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Back to top -->
+  <a href="#home"
+     class="fixed bottom-5 right-5 z-50 inline-flex items-center justify-center h-11 w-11 rounded-2xl border border-slate-200 bg-white/80 hover:bg-white shadow-soft transition"
+     aria-label="Back to top" title="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/>
+    </svg>
+  </a>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Progress bar
+    const progress = document.getElementById('progress');
+    function onScroll(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const p = scrollHeight ? (scrollTop / scrollHeight) * 100 : 0;
+      progress.style.width = p.toFixed(2) + '%';
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) e.target.classList.add('show');
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Copy email
+    const copyBtn = document.getElementById('copyBtn');
+    const toast = document.getElementById('toast');
+    copyBtn?.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText('omaralsayyad20032003@gmail.com');
+        toast.classList.remove('hidden');
+        setTimeout(()=>toast.classList.add('hidden'), 1600);
+      }catch(e){
+        alert('Could not copy. Please copy manually: omaralsayyad20032003@gmail.com');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinic Management & Virtual Assistant | Omar Al Sayyad</title>
+  <meta name="description" content="Clinic Management & Virtual Assistant - Laravel 10 project by Omar Al Sayyad" />
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            ink: '#0B1020',
+            paper: '#FBFBFD',
+            mist: '#F3F4F8',
+            accent: '#7C3AED',
+            accent2: '#06B6D4',
+            accent3: '#F59E0B',
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(11,16,32,.12)',
+            lift: '0 20px 60px rgba(11,16,32,.18)',
+          },
+          borderRadius: { xl2: '1.25rem' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :focus-visible { outline: 3px solid rgba(124,58,237,.55); outline-offset: 3px; border-radius: 12px; }
+
+    .bg-aurora{
+      background:
+        radial-gradient(1200px 500px at 10% 10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 420px at 90% 0%, rgba(6,182,212,.20), transparent 55%),
+        radial-gradient(900px 520px at 70% 95%, rgba(245,158,11,.14), transparent 55%),
+        linear-gradient(180deg, #FBFBFD 0%, #F3F4F8 40%, #FBFBFD 100%);
+    }
+    .grain{
+      position: fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    .gcard{
+      position: relative;
+      border-radius: 1.25rem;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 18px 50px rgba(11,16,32,.10);
+    }
+    .gcard:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 1.35rem;
+      background: linear-gradient(120deg, rgba(124,58,237,.55), rgba(6,182,212,.35), rgba(245,158,11,.25));
+      filter: blur(18px);
+      opacity: .55;
+      z-index:0;
+      pointer-events:none;
+    }
+    .gcard > *{ position: relative; z-index:1; }
+  </style>
+</head>
+
+<body class="font-sans text-ink bg-aurora">
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="gcard px-4 sm:px-6 py-3 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 font-extrabold tracking-tight hover:opacity-80 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <span class="hidden sm:block">Back to Portfolio</span>
+        </a>
+
+        <div class="flex items-center gap-3">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-white"
+                style="background: linear-gradient(135deg, rgba(124,58,237,1), rgba(6,182,212,1));">
+            OA
+          </span>
+          <span class="hidden sm:block font-extrabold">Omar Al Sayyad</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-20">
+    <!-- Project Header -->
+    <section class="pt-10 sm:pt-14 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex items-center gap-2 text-xs font-extrabold px-3 py-1 rounded-full border border-slate-200 bg-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+            Project
+          </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+          Clinic Management & Virtual Assistant
+        </h1>
+
+        <p class="text-lg text-slate-700 font-semibold mb-6">
+          Laravel 10 • Twilio • Stripe
+        </p>
+
+        <p class="text-slate-700 leading-relaxed text-lg mb-6">
+          Multi-role clinic platform (Admin, Clinic Owner, Virtual Assistant, Patient) with booking, dashboards,
+          advanced search, and real-time communication tools.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-8">
+          <a class="inline-flex items-center gap-2 justify-center px-4 py-2.5 rounded-xl bg-ink text-white font-extrabold text-sm hover:opacity-90 transition"
+             href="https://github.com/OmarAlSayyad" target="_blank" rel="noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 14v7H3V3h7"/>
+            </svg>
+            View Source
+          </a>
+        </div>
+
+        <div class="border-t border-slate-200 pt-6">
+          <h2 class="text-xl font-black mb-4">Key Features</h2>
+          <ul class="space-y-3 text-slate-700 leading-relaxed">
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+              <span>Twilio voice/SMS integration for assistant workflows.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-accent2 mt-2 flex-shrink-0"></span>
+              <span>Stripe payment + refund automation.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-accent3 mt-2 flex-shrink-0"></span>
+              <span>RBAC and multi-clinic management.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Images -->
+    <section class="mt-10 sm:mt-12 reveal">
+      <div class="gcard p-6 sm:p-8">
+        <h2 class="text-2xl font-black mb-6">Project Gallery</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <img src="images/clinic-management-1.jpg" alt="Clinic Management Screenshot 1" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-2.jpg" alt="Clinic Management Screenshot 2" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-3.jpg" alt="Clinic Management Screenshot 3" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-4.jpg" alt="Clinic Management Screenshot 4" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-5.jpg" alt="Clinic Management Screenshot 5" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-6.jpg" alt="Clinic Management Screenshot 6" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-7.jpg" alt="Clinic Management Screenshot 7" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+          <img src="images/clinic-management-8.jpg" alt="Clinic Management Screenshot 8" class="w-full h-48 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-full">
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
+        <button id="closeModal" class="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition flex items-center justify-center" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) e.target.classList.add('show');
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Image modal functionality
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    // Add click event to all project images
+    document.querySelectorAll('img').forEach(img => {
+      if (img.id !== 'modalImage') {
+        img.addEventListener('click', () => {
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
